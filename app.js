@@ -56,7 +56,8 @@ class LgTvApi {
 		return new Promise((resolve, reject) => {
 			(this.session === null) ? reject(new Error("No session id. You should call authenticate method at first.")) : 0
 
-			if (!isNaN(parseInt(commandName)) && parameters.length === 0) {
+			if (!isNaN(parseInt(commandName)) && (!parameters || parameters.length === 0)) {
+				parameters = {};
 				parameters.value = commandName
 				commandName = "HandleKeyInput"
 			} else if (isNaN(parseInt(parameters)) && !(((typeof parameters === "object") && (parameters !== null)))) {
